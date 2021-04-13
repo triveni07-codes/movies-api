@@ -1,5 +1,6 @@
 package com.assignment.moviesapi.api;
 
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -54,13 +55,13 @@ public class MovieControllerTest {
   @Test
   public void testGetAllMovies_returnsListOfAllMovies() throws Exception {
     var moviesCollection = fileReader.loadInputData("json/movies-details.json", ArrayList.class);
-    when(movieService.getAllMovies()).thenReturn(moviesCollection);
+    when(movieService.getAllMovies(anyBoolean())).thenReturn(moviesCollection);
 
     MvcResult mvcResult = mockMvc.perform(get("/movies")
         .headers(httpHeaders)).andExpect(status().isOk()).andReturn();
     String expectedMoviesCollection = mvcResult.getResponse().getContentAsString();
     Assertions.assertEquals(expectedMoviesCollection, objectMapper.writeValueAsString(moviesCollection));
-    verify(movieService, times(1)).getAllMovies();
+    verify(movieService, times(1)).getAllMovies(anyBoolean());
   }
 
 }

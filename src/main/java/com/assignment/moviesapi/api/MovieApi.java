@@ -29,6 +29,15 @@ public interface MovieApi {
       produces = {"application/json"})
   ResponseEntity<List<MovieModel>> getAllMovies();
 
+  @ApiOperation(value = "Returns all already watched movies list", nickname = "getAllWatchedMovies",
+      notes = "To get all the watched movies from the collection:")
+  @ApiResponses(value = {
+      @ApiResponse(code = 200, message = "List of watched movies retrieved"),
+      @ApiResponse(code = 404, message = "Movies not found")})
+  @GetMapping(value = "/movies/watched",
+      produces = {"application/json"})
+  ResponseEntity<List<MovieModel>> getAllWatchedMovies();
+
   @ApiOperation(value = "Adds movie to the collection", nickname = "addMovie",
       notes = "To add new movie to collection:")
   @ApiResponses(value = {

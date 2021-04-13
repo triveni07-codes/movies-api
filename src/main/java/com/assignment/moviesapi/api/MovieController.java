@@ -21,7 +21,12 @@ public class MovieController implements MovieApi {
 
   @Override
   public ResponseEntity<List<MovieModel>> getAllMovies() {
-    return new ResponseEntity<>(movieService.getAllMovies(), HttpStatus.OK);
+    return new ResponseEntity<>(movieService.getAllMovies(false), HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<List<MovieModel>> getAllWatchedMovies() {
+    return new ResponseEntity<>(movieService.getAllMovies(true), HttpStatus.OK);
   }
 
   @Override
