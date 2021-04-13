@@ -62,7 +62,7 @@ public class MovieControllerTest {
     var moviesCollection = fileReader.loadInputData("json/movies-details.json", ArrayList.class);
     when(movieService.getAllMovies(anyBoolean())).thenReturn(moviesCollection);
 
-    MvcResult mvcResult = mockMvc.perform(get("/movies")
+    MvcResult mvcResult = mockMvc.perform(get("/api/movies")
         .headers(httpHeaders)).andExpect(status().isOk()).andReturn();
 
     String expectedMoviesCollection = mvcResult.getResponse().getContentAsString();
@@ -79,7 +79,7 @@ public class MovieControllerTest {
     when(movieService.add(any())).thenReturn(movieModel);
 
     mockMvc.perform(MockMvcRequestBuilders
-        .post("/movies")
+        .post("/api/movies")
         .content(new ObjectMapper().writeValueAsString(movieDetails))
         .contentType(MediaType.APPLICATION_JSON)
         .accept(MediaType.APPLICATION_JSON))
