@@ -1,5 +1,6 @@
 package com.assignment.moviesapi.api;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -7,6 +8,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.assignment.moviesapi.database.model.MovieDetails;
+import com.assignment.moviesapi.database.model.MovieModel;
 import com.assignment.moviesapi.service.MovieService;
 import com.assignment.moviesapi.util.FileReader;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,6 +28,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = MovieController.class)
@@ -59,9 +64,29 @@ public class MovieControllerTest {
 
     MvcResult mvcResult = mockMvc.perform(get("/movies")
         .headers(httpHeaders)).andExpect(status().isOk()).andReturn();
+
     String expectedMoviesCollection = mvcResult.getResponse().getContentAsString();
     Assertions.assertEquals(expectedMoviesCollection, objectMapper.writeValueAsString(moviesCollection));
     verify(movieService, times(1)).getAllMovies(anyBoolean());
+  }
+
+  @Test
+  public void testAddMovie_givenMovieDetails_addsMovieToList() throws Exception {
+    MovieDetails movieDetails = new MovieDetails();
+    movieDetails.setTitle("someMovie");
+    MovieModel movieModel = new MovieModel();
+    movieModel.setId(1001L);
+    when(movieService.add(any())).thenReturn(movieModel);
+
+    mockMvc.perform(MockMvcRequestBuilders
+        .post("/movies")
+        .content(new ObjectMapper().writeValueAsString(movieDetails))
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isCreated())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+
+    verify(movieService, times(1)).add(any());
   }
 
 }
