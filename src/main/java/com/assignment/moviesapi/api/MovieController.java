@@ -1,6 +1,7 @@
 package com.assignment.moviesapi.api;
 
 import com.assignment.moviesapi.database.model.MovieDetails;
+import com.assignment.moviesapi.database.model.MovieModel;
 import com.assignment.moviesapi.service.MovieService;
 import java.util.List;
 import javax.validation.Valid;
@@ -19,14 +20,20 @@ public class MovieController implements MovieApi {
   }
 
   @Override
-  public ResponseEntity<List<MovieDetails>> getAllMovies() {
+  public ResponseEntity<List<MovieModel>> getAllMovies() {
     return new ResponseEntity<>(movieService.getAllMovies(), HttpStatus.OK);
   }
 
   @Override
-  public ResponseEntity<String> addMovie(@Valid @NotNull MovieDetails movieDetails) {
-    movieService.add(movieDetails);
-    return new ResponseEntity<>(movieDetails.getTitle() + " Movie added to the collection",
-        HttpStatus.CREATED);
+  public ResponseEntity<MovieModel> addMovie(@Valid @NotNull MovieDetails movieDetails) {
+    return new ResponseEntity<>(movieService.add(movieDetails), HttpStatus.CREATED);
   }
+
+  @Override
+  public ResponseEntity<MovieModel> markMovieAsWatched(@Valid @NotNull String id) {
+    MovieModel movieModel = movieService.getMovieById(id);
+    movieModel.setWatched(true);
+    return new ResponseEntity<>(movieService.updateMovie(movieModel), HttpStatus.CREATED);
+  }
+
 }
