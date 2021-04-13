@@ -1,4 +1,4 @@
-package com.assignment.moviesapi;
+package com.assignment.moviesapi.exception;
 
 import org.springframework.http.HttpStatus;
 

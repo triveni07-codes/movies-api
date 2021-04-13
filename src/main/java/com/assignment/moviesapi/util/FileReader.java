@@ -1,6 +1,6 @@
 package com.assignment.moviesapi.util;
 
-import com.assignment.moviesapi.MoviesDataException;
+import com.assignment.moviesapi.exception.MoviesDataException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.File;
