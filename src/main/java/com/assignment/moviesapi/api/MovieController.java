@@ -36,4 +36,10 @@ public class MovieController implements MovieApi {
     return new ResponseEntity<>(movieService.updateMovie(movieModel), HttpStatus.CREATED);
   }
 
+  @Override
+  public ResponseEntity<String> removeMovie(@Valid @NotNull String id) {
+    movieService.removeMovie(id);
+    return new ResponseEntity<>("Movie removed successfully", HttpStatus.NO_CONTENT);
+  }
+
 }

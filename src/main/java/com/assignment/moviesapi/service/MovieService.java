@@ -45,4 +45,9 @@ public class MovieService {
   public MovieModel updateMovie(MovieModel movieModel) {
     return movieRepository.save(movieModel);
   }
+
+  public void removeMovie(String id) {
+    movieRepository.deleteById(Long.parseLong(id));
+  }
+
 }

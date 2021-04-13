@@ -11,6 +11,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,4 +49,18 @@ public interface MovieApi {
   ResponseEntity<MovieModel> markMovieAsWatched(@ApiParam(value = "Movie id to be marked") @Valid @NotNull
   @RequestParam String id);
 
+  @ApiOperation(value = "Remove the movie from collection", nickname = "removeMovie",
+      notes = "To remove movie:")
+  @ApiResponses(value = {
+      @ApiResponse(code = 200, message = "A movie has been deleted"),
+      @ApiResponse(code = 400, message = "Invalid input supplied")})
+  @DeleteMapping(value = "/movies/{id}",
+      produces = {"application/json"})
+  ResponseEntity<String> removeMovie(@ApiParam(value = "Movie id to be removed") @Valid @NotNull
+  @RequestParam String id);
+
+  /*
+- DELETE /movies/{id} : Remove the movie from the store
+- GET /movies/watched: Get a list of all movies watched
+   */
 }
