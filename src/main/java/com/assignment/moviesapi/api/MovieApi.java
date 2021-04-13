@@ -20,24 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Api(value = "movies", tags = "Movie API")
 public interface MovieApi {
 
-  @ApiOperation(value = "Returns all movies list", nickname = "getAllMovies",
-      notes = "To get all the movies in the collection:")
-  @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "List of movies retrieved"),
-      @ApiResponse(code = 404, message = "Movies not found")})
-  @GetMapping(value = "/movies",
-      produces = {"application/json"})
-  ResponseEntity<List<MovieModel>> getAllMovies();
-
-  @ApiOperation(value = "Returns all already watched movies list", nickname = "getAllWatchedMovies",
-      notes = "To get all the watched movies from the collection:")
-  @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "List of watched movies retrieved"),
-      @ApiResponse(code = 404, message = "Movies not found")})
-  @GetMapping(value = "/movies/watched",
-      produces = {"application/json"})
-  ResponseEntity<List<MovieModel>> getAllWatchedMovies();
-
   @ApiOperation(value = "Adds movie to the collection", nickname = "addMovie",
       notes = "To add new movie to collection:")
   @ApiResponses(value = {
@@ -47,6 +29,15 @@ public interface MovieApi {
       produces = {"application/json"})
   ResponseEntity<MovieModel> addMovie(@ApiParam(value = "Movie details to be added") @Valid @NotNull
   @RequestBody MovieDetails movieDetails);
+
+  @ApiOperation(value = "Returns all movies list", nickname = "getAllMovies",
+      notes = "To get all the movies in the collection:")
+  @ApiResponses(value = {
+      @ApiResponse(code = 200, message = "List of movies retrieved"),
+      @ApiResponse(code = 404, message = "Movies not found")})
+  @GetMapping(value = "/movies",
+      produces = {"application/json"})
+  ResponseEntity<List<MovieModel>> getAllMovies();
 
   @ApiOperation(value = "Mark movie as watched", nickname = "markMovieAsWatched",
       notes = "To mark movie as watched:")
@@ -58,14 +49,23 @@ public interface MovieApi {
   ResponseEntity<MovieModel> markMovieAsWatched(@ApiParam(value = "Movie id to be marked") @Valid @NotNull
   @RequestParam String id);
 
+  @ApiOperation(value = "Returns all already watched movies list", nickname = "getAllWatchedMovies",
+      notes = "To get all the watched movies from the collection:")
+  @ApiResponses(value = {
+      @ApiResponse(code = 200, message = "List of watched movies retrieved"),
+      @ApiResponse(code = 404, message = "Movies not found")})
+  @GetMapping(value = "/movies/watched",
+      produces = {"application/json"})
+  ResponseEntity<List<MovieModel>> getAllWatchedMovies();
+
   @ApiOperation(value = "Remove the movie from collection", nickname = "removeMovie",
       notes = "To remove movie:")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "A movie has been deleted"),
+      @ApiResponse(code = 204, message = "A movie has been deleted"),
       @ApiResponse(code = 400, message = "Invalid input supplied")})
   @DeleteMapping(value = "/movies/{id}",
       produces = {"application/json"})
   ResponseEntity<String> removeMovie(@ApiParam(value = "Movie id to be removed") @Valid @NotNull
   @RequestParam String id);
-  
+
 }

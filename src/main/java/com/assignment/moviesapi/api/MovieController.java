@@ -20,25 +20,23 @@ public class MovieController implements MovieApi {
   }
 
   @Override
-  public ResponseEntity<List<MovieModel>> getAllMovies() {
-    return new ResponseEntity<>(movieService.getAllMovies(false), HttpStatus.OK);
-  }
-
-  @Override
-  public ResponseEntity<List<MovieModel>> getAllWatchedMovies() {
-    return new ResponseEntity<>(movieService.getAllMovies(true), HttpStatus.OK);
-  }
-
-  @Override
   public ResponseEntity<MovieModel> addMovie(@Valid @NotNull MovieDetails movieDetails) {
     return new ResponseEntity<>(movieService.add(movieDetails), HttpStatus.CREATED);
   }
 
   @Override
+  public ResponseEntity<List<MovieModel>> getAllMovies() {
+    return new ResponseEntity<>(movieService.getAllMovies(false), HttpStatus.OK);
+  }
+
+  @Override
   public ResponseEntity<MovieModel> markMovieAsWatched(@Valid @NotNull String id) {
-    MovieModel movieModel = movieService.getMovieById(id);
-    movieModel.setWatched(true);
-    return new ResponseEntity<>(movieService.updateMovie(movieModel), HttpStatus.CREATED);
+    return new ResponseEntity<>(movieService.updateMovie(id), HttpStatus.CREATED);
+  }
+
+  @Override
+  public ResponseEntity<List<MovieModel>> getAllWatchedMovies() {
+    return new ResponseEntity<>(movieService.getAllMovies(true), HttpStatus.OK);
   }
 
   @Override
