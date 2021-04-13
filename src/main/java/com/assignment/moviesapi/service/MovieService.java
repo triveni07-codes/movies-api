@@ -4,7 +4,6 @@ import com.assignment.moviesapi.database.model.MovieDetails;
 import com.assignment.moviesapi.database.model.MovieModel;
 import com.assignment.moviesapi.database.repository.MovieRepository;
 import com.assignment.moviesapi.exception.MoviesDataException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.http.HttpStatus;
@@ -28,16 +27,7 @@ public class MovieService {
   }
 
   public List<MovieModel> getAllMovies(boolean watched) {
-    List<MovieModel> movies = new ArrayList<>();
-    if (watched) {
-      movies = movieRepository.findAllByWatched(true);
-    } else {
-      movies = movieRepository.findAll();
-    }
-    if (movies.isEmpty()) {
-      throw new MoviesDataException("Movie collection is empty", HttpStatus.NOT_FOUND);
-    }
-    return movies;
+    return watched ? movieRepository.findAllByWatched(true) : movieRepository.findAll();
   }
 
   public MovieModel updateMovie(String id) {
