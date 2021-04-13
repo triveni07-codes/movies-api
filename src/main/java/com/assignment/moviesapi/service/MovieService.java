@@ -1,7 +1,7 @@
 package com.assignment.moviesapi.service;
 
+import com.assignment.moviesapi.database.model.MovieDetails;
 import com.assignment.moviesapi.database.model.MovieModel;
-import com.assignment.moviesapi.database.model.MovieResponse;
 import com.assignment.moviesapi.database.repository.MovieRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,19 +16,28 @@ public class MovieService {
     this.movieRepository = movieRepository;
   }
 
-  public List<MovieResponse> getAllMovies() {
+  public List<MovieDetails> getAllMovies() {
     List<MovieModel> movieModels = movieRepository.findAll();
-    List<MovieResponse> movies = new ArrayList<>();
+    List<MovieDetails> movies = new ArrayList<>();
 
     if (!movieModels.isEmpty()) {
       movieModels.forEach(movieModel -> {
-        MovieResponse movieResponse = new MovieResponse();
-        movieResponse.setTitle(movieModel.getTitle());
-        movieResponse.setComment(movieModel.getComment());
-        movieResponse.setImageUrl(movieModel.getImageUrl());
-        movies.add(movieResponse);
+        MovieDetails movieDetails = new MovieDetails();
+        movieDetails.setTitle(movieModel.getTitle());
+        movieDetails.setComment(movieModel.getComment());
+        movieDetails.setImageUrl(movieModel.getImageUrl());
+        movies.add(movieDetails);
       });
     }
     return movies;
   }
+
+  public void add(MovieDetails movie) {
+    MovieModel movieModel = new MovieModel();
+    movieModel.setTitle(movie.getTitle());
+    movieModel.setComment(movie.getComment());
+    movieModel.setImageUrl(movie.getImageUrl());
+    movieRepository.save(movieModel);
+  }
+
 }

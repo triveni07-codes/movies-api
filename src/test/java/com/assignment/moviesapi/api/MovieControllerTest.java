@@ -56,7 +56,7 @@ public class MovieControllerTest {
     var moviesCollection = fileReader.loadInputData("json/movies-details.json", ArrayList.class);
     when(movieService.getAllMovies()).thenReturn(moviesCollection);
 
-    MvcResult mvcResult = mockMvc.perform(get("/getAllMovies")
+    MvcResult mvcResult = mockMvc.perform(get("/movies")
         .headers(httpHeaders)).andExpect(status().isOk()).andReturn();
     String expectedMoviesCollection = mvcResult.getResponse().getContentAsString();
     Assertions.assertEquals(expectedMoviesCollection, objectMapper.writeValueAsString(moviesCollection));
