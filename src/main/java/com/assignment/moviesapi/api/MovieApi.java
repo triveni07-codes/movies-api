@@ -67,9 +67,5 @@ public interface MovieApi {
       produces = {"application/json"})
   ResponseEntity<String> removeMovie(@ApiParam(value = "Movie id to be removed") @Valid @NotNull
   @RequestParam String id);
-
-  /*
-- DELETE /movies/{id} : Remove the movie from the store
-- GET /movies/watched: Get a list of all movies watched
-   */
+  
 }
