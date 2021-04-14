@@ -18,7 +18,7 @@ public class MovieModel {
   private String title;
   @Column(name = "description")
   private String comment;
-  @Column(name = "image_url")
+  @Column(name = "image_url", length = 1000)
   private String imageUrl;
   @Column(name = "watched")
   private Boolean watched = false;
