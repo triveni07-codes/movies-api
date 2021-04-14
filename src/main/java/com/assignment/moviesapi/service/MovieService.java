@@ -21,7 +21,7 @@ public class MovieService {
   }
 
   public MovieModel add(MovieDetails movie) {
-    log.debug("Adding movie to collection {}", movie.getTitle());
+    log.info("Adding movie to collection {}", movie.getTitle());
     MovieModel movieModel = new MovieModel();
     movieModel.setTitle(movie.getTitle());
     movieModel.setComment(movie.getComment());
@@ -34,10 +34,10 @@ public class MovieService {
   }
 
   public MovieModel updateMovie(String id) {
-    log.debug("Marking movie as watched for id {}", id);
+    log.info("Marking movie as watched for id {}", id);
     MovieModel movieModel = getMovieById(id);
     movieModel.setWatched(true);
-    log.debug("Marked movie as watched for id {}", id);
+    log.info("Marked movie as watched for id {}", id);
     return movieRepository.save(movieModel);
   }
 

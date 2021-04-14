@@ -30,8 +30,4 @@ INSERT INTO MOVIES
 (ID, TITLE, DESCRIPTION, IMAGE_URL, WATCHED)
 VALUES (1005, 'The Dark Knight', 'This looks mysterious. Cool!', 'https://qph.fs.quoracdn.net/main-qimg-d96cc1808f88d15a62633841e6e2efe0', FALSE);
 
-INSERT INTO MOVIES
-(ID, TITLE, DESCRIPTION, IMAGE_URL, WATCHED)
-VALUES (1006, 'Spiderman', 'Someone said this was fun. Maybe!', 'https://lh3.googleusercontent.com/proxy/83yD50ZrGb_ZDKdXzLFBg7VctMW4a6s5AqagtLYGGk8ehY7AfQx5VyNgN08Z7TNUJWksSmJFRDl9s9LO7zfWek2e480G5lLbgqNY1sooRZQiIAe6A3h-pvpqZiZ1ituNnWNEVOH8Hggp-lDKSpEOVzIrezHSmV7Hib-8ssyhp4bgew8', FALSE);
-
 commit;
