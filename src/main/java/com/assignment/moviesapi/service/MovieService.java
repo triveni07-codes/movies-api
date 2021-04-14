@@ -6,10 +6,12 @@ import com.assignment.moviesapi.database.repository.MovieRepository;
 import com.assignment.moviesapi.exception.MoviesDataException;
 import java.util.List;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class MovieService {
 
   private final MovieRepository movieRepository;
@@ -19,6 +21,7 @@ public class MovieService {
   }
 
   public MovieModel add(MovieDetails movie) {
+    log.debug("Adding movie to collection {}", movie.getTitle());
     MovieModel movieModel = new MovieModel();
     movieModel.setTitle(movie.getTitle());
     movieModel.setComment(movie.getComment());
@@ -31,8 +34,10 @@ public class MovieService {
   }
 
   public MovieModel updateMovie(String id) {
+    log.debug("Marking movie as watched for id {}", id);
     MovieModel movieModel = getMovieById(id);
     movieModel.setWatched(true);
+    log.debug("Marked movie as watched for id {}", id);
     return movieRepository.save(movieModel);
   }
 

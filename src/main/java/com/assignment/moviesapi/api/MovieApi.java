@@ -45,7 +45,7 @@ public interface MovieApi {
   @ApiOperation(value = "Mark movie as watched", nickname = "markMovieAsWatched",
       notes = "To mark movie as watched:")
   @ApiResponses(value = {
-      @ApiResponse(code = 201, message = "A movie has been marked as watched"),
+      @ApiResponse(code = 200, message = "A movie has been marked as watched"),
       @ApiResponse(code = 400, message = "Invalid input supplied")})
   @PutMapping(value = "/movies/{id}",
       produces = {"application/json"})

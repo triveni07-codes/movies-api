@@ -8,10 +8,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = { "http://localhost:3000" })
 @RestController
 public class MovieController implements MovieApi {
 
@@ -33,7 +31,7 @@ public class MovieController implements MovieApi {
 
   @Override
   public ResponseEntity<MovieModel> markMovieAsWatched(@Valid @NotNull String id) {
-    return new ResponseEntity<>(movieService.updateMovie(id), HttpStatus.CREATED);
+    return new ResponseEntity<>(movieService.updateMovie(id), HttpStatus.OK);
   }
 
   @Override
