@@ -46,8 +46,7 @@ public interface MovieApi {
       notes = "To mark movie as watched:")
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "A movie has been marked as watched"),
-      @ApiResponse(code = 400, message = "Invalid input supplied"),
-      @ApiResponse(code = 405, message = "PUT request not supported yet")})
+      @ApiResponse(code = 400, message = "Invalid input supplied")})
   @PutMapping(value = "/movies/{id}",
       produces = {"application/json"})
   ResponseEntity<MovieModel> markMovieAsWatched(@ApiParam(value = "Movie id to be marked") @Valid @NotNull
