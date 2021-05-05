@@ -27,7 +27,7 @@ Install the dependencies and devDependencies and start the server.
 ```sh
 cd movies-api
 mvn clean install
-mvn sping-boot:run
+mvn spring-boot:run
 ```
 
 Once we start the applications locally, backend is available on [http://localhost:8080/swagger-ui.html]
