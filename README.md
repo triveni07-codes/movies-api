@@ -1,6 +1,6 @@
 # Movies-api
 - Basic CRUD functionality to manage movies collections.
-- ✨ ✨
+ ✨ ✨
 
 ## Features
 - Show all the movies list collection.
